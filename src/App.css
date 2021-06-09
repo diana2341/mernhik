@@ -8,3 +8,27 @@
 .rs-nav-item-content{
 
 }
+.rs-table{
+  /* max-width: 60%; */
+  position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  	
+	margin: auto;
+  padding: 10px;
+}
+.rs-panel{
+    max-width: 20%;
+    /* padding: 20px; */
+margin-left: 20px;
+align-items: center;
+text-align: center;
+}
+/* .rs-btn-lg.rs-btn-icon > .rs-icon {
+  font-size: 30px!important;
+  overflow: visible !important
+
+
+} */

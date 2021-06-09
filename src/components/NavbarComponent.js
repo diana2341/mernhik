@@ -1,8 +1,28 @@
 import React from 'react'
 import { Navbar,Nav,Icon,Dropdown } from 'rsuite';
+import ModalForm from './ModalForm'
 
-function NavbarComponent() {
+class NavbarComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false
+    };
+    this.close = this.close.bind(this);
+    this.open = this.open.bind(this);
+  }
+  close() {
+    this.setState({ show: false });
+  }
+  open() {
+    this.setState({ show: true });
+  }
+  render(){
     return (
+      <div>
+                      <ModalForm open={this.open} close={this.close} show={this.state.show}/>
+
+     
       <Navbar>
       <Navbar.Header>
         <a href="/" className="navbar-brand logo"><Icon icon='check-square-o'/>TsCheck</a>
@@ -10,7 +30,7 @@ function NavbarComponent() {
       <Navbar.Body>
         <Nav>
           <Nav.Item href='/'icon={<Icon icon="home" />} >Home</Nav.Item>
-          <Nav.Item href='projects'>Projects</Nav.Item>
+          <Nav.Item    onClick={this.open}>Add Task</Nav.Item>
           <Nav.Item href='calendar'>Calendar</Nav.Item>
           {/* <Nav.Item>Calendar</Nav.Item> */}
 
@@ -32,7 +52,9 @@ function NavbarComponent() {
         </Nav>
       </Navbar.Body>
     </Navbar>
+    </div>
     )
+  }
 }
 
 export default NavbarComponent

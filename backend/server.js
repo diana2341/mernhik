@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri,{useNewUrlParser: true, useCreateIndex: true});
+mongoose.connect(uri,{useNewUrlParser: true, useCreateIndex: true,autoIndex: true,useUnifiedTopology: true});
 
 const connection = mongoose.connection;
 
@@ -19,10 +19,10 @@ connection.once('open', ()=>{
     console.log('MongoDB database connection established successfully')
 })
 
-const projectRouter = require('./routes/projects')
+const taskRouter = require('./routes/task')
 const usersRouter = require('./routes/users')
 
-app.use('/projects',projectRouter)
+app.use('/tasks',taskRouter)
 app.use('/users',usersRouter)
 
 app.listen(port,()=>{

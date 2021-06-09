@@ -12,11 +12,10 @@ import SignUp from './components/SignUp';
 import About from './components/About';
 // import { Calendar } from 'rsuite';
 import Calendar from './components/CalendarComponent'
-import Projects from './components/Projects';
 import Login from './components/Login';
 import EditProfile from './components/EditProfile';
 import Sidenavigation from './components/Sidenavigation';
-import Tasks from './Tasks';
+import Tasks from './components/Tasks';
 
 function App() {
   return (
@@ -28,7 +27,6 @@ function App() {
        <Route exact path='/about' render={()=> <About/>}/>
        <Route exact path='/signup' render={()=> <SignUp/>}/>
        <Route exact path='/calendar' render={()=> <Calendar/>}/>
-       <Route exact path='/projects' render={()=> <Projects/>}/>
        <Route exact path='/login' render={()=> <Login/>}/>
        <Route exact path='/edit-profile' render={()=> <EditProfile/>}/>
        <Route exact path='/tasks' render={()=> <Tasks/>}/>

@@ -7,7 +7,7 @@ function SignUp() {
     const [date_birth,setDateOfBirth]=useState(' ')
     const [company_name,setCompanyName]=useState(' ')
     const [email,setEmail]=useState(' ')
-    const [password,setPassword]=useState(' ')
+    const [password,setPassword]=useState('')
 
     const onSubmit=()=>{
         const user={first_name,last_name,date_birth,company_name,email,password}
@@ -19,7 +19,7 @@ function SignUp() {
         setDateOfBirth(' ')
         setCompanyName(' ')
         setEmail(' ')
-        setPassword(' ')
+        setPassword('')
     }
     const onChangeFirstName=(e)=>{
         setFirstName(e)
@@ -59,11 +59,7 @@ function SignUp() {
       <FormControl onChange={(e)=>onChangeDateOfBirth(e)}name="dateOfBirth" value={date_birth} />
       <HelpBlock>Required</HelpBlock>
     </FormGroup>
-    <FormGroup>
-      <ControlLabel>Company Name</ControlLabel>
-      <FormControl onChange={(e)=>onChangeCompanyName(e)}name="companyName" value={company_name} />
-      <HelpBlock>Required</HelpBlock>
-    </FormGroup>
+
     <FormGroup>
       <ControlLabel>Email</ControlLabel>
       <FormControl onChange={(e)=>onChangeEmail(e)}name="email" type="email" value={email} />
