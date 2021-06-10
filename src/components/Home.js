@@ -1,5 +1,5 @@
 import React , { useState } from 'react';
-import {Table,Container,Checkbox,Icon,IconButton,Divider,Whisper} from 'rsuite'
+import {Alert,Table,Container,Checkbox,Icon,IconButton,Divider,Whisper, FormControl, FormGroup,DatePicker,SelectPicker,ControlLabel,HelpBlock} from 'rsuite'
 import fakeData from './fakeData'
 import axios from 'axios'
 import Tasks from './Tasks'
@@ -72,21 +72,55 @@ class Home extends React.Component {
       //  }
        EditCell = ({ id,editing, rowData, dataKey, onChange, ...props }) => {
 
-
+        const data=[
+          {
+            "label": "High",
+            "value": "High",
+          },
+           {
+            "label": "Medium",
+            "value": "Medium",
+          },
+          {
+            "label": "Low",
+            "value": "Low",
+          },
+        ]
         // const editing = rowData.status === 'EDIT';
         return (
           <Table.Cell {...props} className={editing ? 'table-content-editing' : ''}>
             {editing && rowData[id] === this.state.selected ? (
+             <>
+              {dataKey==='due_date'?
+                <FormGroup>
+                <DatePicker oneTap onChange={event => {
+                  onChange && onChange(rowData[id], dataKey, event);
+                }}name="due_date" defaultValue={dataKey==='due_date'?dayjs(rowData[dataKey]).format('MM/DD/YYYY'):rowData[dataKey]     }
+                />
+                {/* <FormControl onChange={this.onChangeDueDate}name="due_date" value={this.state.due_date} /> */}
+                <HelpBlock tooltip>Required</HelpBlock>
+              </FormGroup>:dataKey==='urgency_level'?
+                  <FormGroup>
+                  {/* <FormControl onChange={this.onChangeUrgencyLevel}name="urgency_level" value={this.state.urgency_level} /> */}
+                  <SelectPicker searchable={false}data={data} onChange={event => {
+                  onChange && onChange(rowData[id], dataKey, event);
+                }}name="urgency_level"                defaultValue={dataKey==='due_date'?dayjs(rowData[dataKey]).format('MM/DD/YYYY'):rowData[dataKey]     }
+                />
+                  <HelpBlock>Required</HelpBlock>
+                </FormGroup>
+            :
+   
               <input
                 key={ rowData[id]}
                 className="rs-input"
-                defaultValue={dataKey==='due_date'?dayjs(rowData[dataKey]).format('DD/MM/YYYY'):rowData[dataKey]     }
+                defaultValue={dataKey==='due_date'?dayjs(rowData[dataKey]).format('MM/DD/YYYY'):rowData[dataKey]     }
                 onChange={event => {
                   onChange && onChange(rowData[id], dataKey, event.target.value);
                 }}
-              />
+              />}
+              </>
             ) : (
-              <span className="table-content-edit-span">{dataKey==='due_date'?dayjs(rowData[dataKey]).format('DD/MM/YYYY'):rowData[dataKey]       }</span>
+              <span className="table-content-edit-span">{dataKey==='due_date'?dayjs(rowData[dataKey]).format('MM/DD/YYYY'):rowData[dataKey]       }</span>
             )}
           </Table.Cell>
         );
@@ -224,7 +258,10 @@ class Home extends React.Component {
 
                    const deleteExercise=(id)=> {
                       axios.delete('http://localhost:5000/tasks/'+rowData._id)
-                        .then(response => { console.log(response.data)});
+                        .then(response => { 
+                          Alert.success('Task has been Deleted!.')
+
+                        });
                   
                       this.setState({
                         tasks: this.state.tasks.filter(el => el._id !== rowData._id)
@@ -260,7 +297,8 @@ class Home extends React.Component {
                       let index = this.state.tasks.findIndex(el => el._id===rowData._id);
                       task[index] = res.data;                  
                       this.setState({ tasks:task });            
-                                   
+                      Alert.success('Task has been Updated!.')
+      
                      })
                   
                     }

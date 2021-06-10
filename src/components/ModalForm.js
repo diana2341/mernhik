@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import {ButtonToolbar,Button,Modal,Form,FormControl,DatePicker,FormGroup,ControlLabel,HelpBlock,SelectPicker} from 'rsuite'
+import {Alert,ButtonToolbar,Button,Modal,Form,FormControl,DatePicker,FormGroup,ControlLabel,HelpBlock,SelectPicker} from 'rsuite'
 class ModalForm extends React.Component {
   state = {
           name: '',
@@ -88,7 +88,7 @@ onChangeDueDate=(e)=>{
 
     <FormGroup>
       <ControlLabel>Due date</ControlLabel>
-      <DatePicker style={{ width: 280 }}onChange={this.onChangeDueDate}name="due_date" value={this.state.due_date} />
+      <DatePicker oneTap style={{ width: 280 }}onChange={this.onChangeDueDate}name="due_date" value={this.state.due_date} />
       {/* <FormControl onChange={this.onChangeDueDate}name="due_date" value={this.state.due_date} /> */}
       <HelpBlock tooltip>Required</HelpBlock>
     </FormGroup>
