@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import {ButtonToolbar,Button,Modal,Form,FormControl,FormGroup,ControlLabel,HelpBlock} from 'rsuite'
+import {ButtonToolbar,Button,Modal,Form,FormControl,DatePicker,FormGroup,ControlLabel,HelpBlock,SelectPicker} from 'rsuite'
 class ModalForm extends React.Component {
   state = {
           name: '',
@@ -32,7 +32,20 @@ onChangeDueDate=(e)=>{
       render() {
 
     
-    
+    const data=[
+      {
+        "label": "High",
+        "value": "High",
+      },
+       {
+        "label": "Medium",
+        "value": "Medium",
+      },
+      {
+        "label": "Low",
+        "value": "Low",
+      },
+    ]
         const onSubmit=()=>{
             const task={user_id:'60bea27c131ac25d67a34d69',name:this.state.name,description:this.state.description,urgency_level:this.state.urgency_level,due_date:this.state.due_date}
             axios.post('http://localhost:5000/tasks/add',task)
@@ -68,13 +81,15 @@ onChangeDueDate=(e)=>{
     </FormGroup>
     <FormGroup>
       <ControlLabel>Priority</ControlLabel>
-      <FormControl onChange={this.onChangeUrgencyLevel}name="urgency_level" value={this.state.urgency_level} />
+      {/* <FormControl onChange={this.onChangeUrgencyLevel}name="urgency_level" value={this.state.urgency_level} /> */}
+      <SelectPicker searchable={false}data={data} onChange={this.onChangeUrgencyLevel}name="urgency_level"value={this.state.urgency_level}style={{ width: 224 }} />
       <HelpBlock>Required</HelpBlock>
     </FormGroup>
 
     <FormGroup>
       <ControlLabel>Due date</ControlLabel>
-      <FormControl onChange={this.onChangeDueDate}name="due_date" value={this.state.due_date} />
+      <DatePicker style={{ width: 280 }}onChange={this.onChangeDueDate}name="due_date" value={this.state.due_date} />
+      {/* <FormControl onChange={this.onChangeDueDate}name="due_date" value={this.state.due_date} /> */}
       <HelpBlock tooltip>Required</HelpBlock>
     </FormGroup>
    

@@ -3,6 +3,7 @@ import {Table,Container,Checkbox,Icon,IconButton,Divider,Whisper} from 'rsuite'
 import fakeData from './fakeData'
 import axios from 'axios'
 import Tasks from './Tasks'
+import * as dayjs from 'dayjs'
 
 
 import 'rsuite/dist/styles/rsuite-default.css';
@@ -79,13 +80,13 @@ class Home extends React.Component {
               <input
                 key={ rowData[id]}
                 className="rs-input"
-                defaultValue={rowData[dataKey]}
+                defaultValue={dataKey==='due_date'?dayjs(rowData[dataKey]).format('DD/MM/YYYY'):rowData[dataKey]     }
                 onChange={event => {
                   onChange && onChange(rowData[id], dataKey, event.target.value);
                 }}
               />
             ) : (
-              <span className="table-content-edit-span">{rowData[dataKey] }</span>
+              <span className="table-content-edit-span">{dataKey==='due_date'?dayjs(rowData[dataKey]).format('DD/MM/YYYY'):rowData[dataKey]       }</span>
             )}
           </Table.Cell>
         );
@@ -93,7 +94,7 @@ class Home extends React.Component {
       render() {
 
 
-        
+
         
         
           const  CustomWhisper=()=>{
@@ -115,9 +116,10 @@ class Home extends React.Component {
           }
           const CheckCell = ({ rowData, onChange, checkedKeys, dataKey, ...props }) => (
             <Table.Cell {...props} style={{ padding: 0 }}>
+              {console.log(dayjs(rowData[dataKey]).format('DD/MM/YYYY')   )}
               <div style={{ lineHeight: '46px' }}>
                 <Checkbox
-                  value={rowData[dataKey]}
+                  value={dayjs(rowData[dataKey]).format('DD/MM/YYYY')           }
                   inline
                   onChange={onChange}
                   checked={checkedKeys.some(item => item === rowData[dataKey])}

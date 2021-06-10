@@ -30,7 +30,7 @@ class NavbarComponent extends React.Component {
       <Navbar.Body>
         <Nav>
           <Nav.Item href='/'icon={<Icon icon="home" />} >Home</Nav.Item>
-          <Nav.Item    onClick={this.open}>Add Task</Nav.Item>
+          <Nav.Item icon={<Icon icon="plus"  />}   onClick={this.open}>Add Task</Nav.Item>
           <Nav.Item href='calendar'>Calendar</Nav.Item>
           {/* <Nav.Item>Calendar</Nav.Item> */}
 
